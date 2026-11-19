@@ -22,6 +22,7 @@
 
 - Mockup: `agent/maquette_bibliotheque.png`. Run: `python3 agent/interface_tk.py`; needs `python3-tk` and the `bibliotheque_py` module built in `agent/build/` (the UI adds that folder to `sys.path`).
 - 13 pages reached by clicking the sidebar items; the selected item and status bar update on navigation. All pages are wired to `LibrarySession`: books (add, remove by ISBN or selected row, title/author/global search, all/available), users (add/list), loans (borrow/return), live statistics, save and backup (existing `.backup` files are replaced). French success/error messages are shown under the title. Every successful mutation (add/remove book, add user, borrow/return) saves the data files immediately, so changes survive a restart; `session.save()` is also called when the window closes.
+- Action buttons are created directly as children of their own frame in `_actions()` (no `pack(in_=...)` from `self.page`), which keeps them visible on every page. `_lire(entree, placeholder)` treats untouched placeholder text as empty input. After a successful user addition, the UI switches to `tous_les_utilisateurs` and shows a confirmation containing the name and ID. Restart the UI after editing `interface_tk.py`; a running Python process does not reload the code.
 - `BibliothequeUI(root, data_dir=DONNEES)` accepts another data directory, which is useful for tests; never save into the tracked `agent/data/` while testing.
 
 ## Notebooks
